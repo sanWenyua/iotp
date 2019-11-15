@@ -12,5 +12,8 @@ func init() {
 }
 
 func runDaemon(cmd *cobra.Command, args []string) error {
+	// ll := services.NewLocal()
+	// ll.Stat()
+	// fmt.Println(ll.CPUUsage, ll.DiskUsage, ll.MemoryUsage)
 	return nil
 }

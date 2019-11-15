@@ -1,6 +1,9 @@
 package services
 
 import (
+	"fmt"
+	"time"
+
 	"github.com/juju/errors"
 	"github.com/shirou/gopsutil/cpu"
 	"github.com/shirou/gopsutil/disk"
@@ -8,7 +11,7 @@ import (
 )
 
 type Local struct {
-	*ServicesStat
+	ServicesStat
 }
 
 // Stat get all system resources usage
@@ -16,9 +19,12 @@ func (l *Local) Stat() error {
 	l.Name = "localhost"
 
 	// Get all cpu usage
-	cpuUsage, err := cpu.Percent(0, false)
+	cpuUsage, err := cpu.Percent(time.Second, false)
 	if err != nil {
 		return errors.Annotate(err, "Get cpu usage fail")
+	}
+	for _, item := range cpuUsage {
+		fmt.Println(item)
 	}
 	l.CPUUsage = cpuUsage[0]
 
@@ -41,5 +47,5 @@ func (l *Local) Stat() error {
 
 func NewLocal() *Local {
 
-	return new(Local)
+	return &Local{}
 }

@@ -24,7 +24,7 @@ func init() {
 }
 
 func main() {
-	fmt.Print("Start")
+	fmt.Println("Daemon start")
 	err := rootCmd.Execute()
 	if err != nil {
 		log.Error(err)
